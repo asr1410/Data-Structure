@@ -25,6 +25,13 @@ struct Node *insertionCircularLinkedList(struct Node *head)
     struct Node *ptr;
     ptr = (struct Node *)malloc(sizeof(struct Node));
     ptr->data = value;
+    struct Node *p = head->next;
+    while (p->next != head)
+    {
+        p = p->next;
+    }
+    //AT THIS POINT P WILL BE AT THE LAST NODE OF CIRCULAR LINKED LIST
+    p->next = ptr;
     ptr->next = head;
     head = ptr;
     return head;
