@@ -11,6 +11,8 @@ void printLinkedList(struct Node *head)
     do
     {
         printf("element are %d\n", ptr->data);
+        //  [1] [2] [3] [4] [5]
+        // [ptr]
         ptr = ptr->next;
     } while (ptr != head);
     free(ptr);
