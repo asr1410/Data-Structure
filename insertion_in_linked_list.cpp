@@ -116,16 +116,16 @@ int main()
     four->next = NULL;
 
     //AT THE HEAD
-    // head = insertAtStart(head);
+    head = insertAtStart(head);
 
     //AT BETWEEN THE NODES;
-    // insertAtTheIndex(head);
+    insertAtTheIndex(head);
 
     //AT THE END
-    // insertAtEnd(head);
+    insertAtEnd(head);
 
     //INSERT AT NODE
-    // insertAtNode(two);
+    insertAtNode(two);
 
     //TRAVERSAL OF THE ARRAY
     printLinkedList(head);
