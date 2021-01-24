@@ -1,47 +1,61 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include <stdio.h>
+#include <stdlib.h>
 
-class Stack
+struct stack
 {
-public:
     int size;
     int top;
     int *arr;
 };
 
-int isEmpty(Stack *ptr)
+int isEmpty(struct stack *ptr)
 {
     if (ptr->top == -1)
     {
         return 1;
     }
-    return 0;
+    else
+    {
+        return 0;
+    }
 }
 
-int isFull(Stack *ptr)
+int isFull(struct stack *ptr)
 {
     if (ptr->top == ptr->size - 1)
     {
         return 1;
     }
-    return 0;
+    else
+    {
+        return 0;
+    }
 }
 
 int main()
 {
-    Stack *s;
+    // struct stack s;
+    // s.size = 80;
+    // s.top = -1;
+    // s.arr = (int *) malloc(s.size * sizeof(int));
+
+    struct stack *s;
     s->size = 80;
     s->top = -1;
-    s->arr = new int(s->size);
-    s->top++;
+    s->arr = (int *)malloc(s->size * sizeof(int));
+
+    // Pushing an element manually
+    // s->arr[0] = 7;
+    // s->top++;
+
+    // Check if stack is empty
     if (isEmpty(s))
     {
-        cout << "stack is empty";
+        printf("The stack is empty");
     }
     else
     {
-        cout << "stack is not empty";
+        printf("The stack is not empty");
     }
-
     return 0;
 }
