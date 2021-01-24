@@ -36,6 +36,8 @@ Node *addBegin(Node *head)
     Node *previous = new Node();
     previous->data = value;
     previous->next = head->next;
+    // cout << "head.next = " << head->next << endl;
+    // cout << "head = " << head << endl;
     head->next = previous;
     return head;
 }
@@ -111,9 +113,9 @@ int main()
     head = addToEmpty(head);
     head = addBegin(head);
     head = addBegin(head);
-    head = addEnd(head);
-    head = addEnd(head);
-    head = addAfter(head);
+    // head = addEnd(head);
+    // head = addEnd(head);
+    // head = addAfter(head);
     traverse(head);
 
     return 0;
