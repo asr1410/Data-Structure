@@ -59,7 +59,28 @@ int pop(struct stack *ptr)
         return val;
     }
 }
+int peek(struct stack *sp, int i)
+{
+    int arrayInd = sp->top - i + 1;
+    if (arrayInd < 0)
+    {
+        printf("Not a valid position for the stack\n");
+        return -1;
+    }
+    else
+    {
+        return sp->arr[arrayInd];
+    }
+}
+int stackTop(struct stack *sp)
+{
+    return sp->arr[sp->top];
+}
 
+int stackBottom(struct stack *sp)
+{
+    return sp->arr[0];
+}
 int main()
 {
     struct stack *sp = (struct stack *)malloc(sizeof(struct stack));
@@ -81,6 +102,9 @@ int main()
     push(sp, 89);
     push(sp, 6); // ---> Pushed 10 values
     // push(sp, 46); // Stack Overflow since the size of the stack is 10
+    printf("value of element at index %d is %d\n", 5, peek(sp, 5));
+    printf("stack top %d\n", stackTop(sp));
+    printf("stack Bottom %d\n", stackBottom(sp));
     printf("After pushing, Full: %d\n", isFull(sp));
     printf("After pushing, Empty: %d\n", isEmpty(sp));
 
