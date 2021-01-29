@@ -23,8 +23,7 @@ Queue *createQueue(unsigned capacity)
 
     // This is important, see the enqueue
     queue->rear = capacity - 1;
-    queue->array = new int[(
-        queue->capacity * sizeof(int))];
+    queue->array = new int[(queue->capacity * sizeof(int))];
     return queue;
 }
 
@@ -80,7 +79,6 @@ int rear(Queue *queue)
         return INT_MIN;
     return queue->array[queue->rear];
 }
-
 // Driver code
 int main()
 {
@@ -90,11 +88,8 @@ int main()
     enqueue(queue, 20);
     enqueue(queue, 30);
     enqueue(queue, 40);
-
     cout << dequeue(queue) << " dequeued from queue\n";
-
     cout << "Front item is " << front(queue) << endl;
     cout << "Rear item is " << rear(queue) << endl;
-
     return 0;
 }
