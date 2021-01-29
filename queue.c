@@ -1,87 +1,96 @@
 #include <stdio.h>
+#include <math.h>
+#include <time.h>
+#include <conio.h>
+#include <string.h>
 #include <stdlib.h>
+#include <limits.h>
 
-struct queue
+struct Queue
 {
-    int size;
-    int f;
-    int r;
-    int *arr;
+    int front, rear, size, capacity;
+    int *array;
 };
 
-int isEmpty(struct queue *q)
+struct Queue *createQueue(int capacity)
 {
-    if (q->r == q->f)
-    {
-        return 1;
-    }
-    return 0;
+    struct Queue *queue = (struct Queue *)malloc(sizeof(struct Queue));
+    queue->capacity = capacity;
+    queue->front = queue->size = 0;
+    queue->rear = queue->capacity - 1;
+    queue->array = (int *)malloc(queue->capacity * sizeof(int));
+    return queue;
 }
 
-int isFull(struct queue *q)
+int isFull(struct Queue *queue)
 {
-    if (q->r == q->size - 1)
-    {
-        return 1;
-    }
-    return 0;
+    return (queue->size == queue->capacity);
 }
 
-void enqueue(struct queue *q, int val)
+int isEmpty(struct Queue *queue)
 {
-    if (isFull(q))
-    {
-        printf("This Queue is full\n");
-    }
-    else
-    {
-        q->r++;
-        q->arr[q->r] = val;
-        printf("Enqued element: %d\n", val);
-    }
+    return (queue->size == 0);
 }
 
-int dequeue(struct queue *q)
+void enqueue(struct Queue *queue, int item)
 {
-    int a = -1;
-    if (isEmpty(q))
+    if (isFull(queue))
     {
-        printf("This Queue is empty\n");
+        printf("queue is full\n");
+        return;
     }
-    else
-    {
-        q->f++;
-        a = q->arr[q->f];
-    }
-    return a;
+    queue->rear = (queue->rear + 1) % queue->capacity;
+    queue->array[queue->rear] = item;
+    queue->size = queue->size + 1;
+    printf("%d is the enqueued in the queue\n", item);
 }
 
+int dequeue(struct Queue *queue)
+{
+    if (isEmpty(queue))
+    {
+        printf("queue is empty\n");
+        return 0;
+    }
+    int item = queue->array[queue->front];
+    queue->front = (queue->front + 1) % queue->capacity;
+    queue->size = queue->size - 1;
+    return item;
+}
+
+int front(struct Queue *queue)
+{
+    if (isEmpty(queue))
+    {
+        printf("queue is empty\n");
+        return 0;
+    }
+    return queue->array[queue->front];
+}
+
+int rear(struct Queue *queue)
+{
+    if (isEmpty(queue))
+    {
+        printf("queue is empty\n");
+        return 0;
+    }
+    return queue->array[queue->rear];
+}
 int main()
 {
-    struct queue q;
-    q.size = 4;
-    q.f = q.r = 0;
-    q.arr = (int *)malloc(q.size * sizeof(int));
-
-    // Enqueue few elements
-    enqueue(&q, 12);
-    enqueue(&q, 15);
-    enqueue(&q, 1);
-    printf("Dequeuing element %d\n", dequeue(&q));
-    printf("Dequeuing element %d\n", dequeue(&q));
-    printf("Dequeuing element %d\n", dequeue(&q));
-    enqueue(&q, 45);
-    enqueue(&q, 45);
-    enqueue(&q, 45);
-
-    if (isEmpty(&q))
-    {
-        printf("Queue is empty\n");
-    }
-    if (isFull(&q))
-    {
-        printf("Queue is full\n");
-    }
-
+    struct Queue *queue = createQueue(4);
+    enqueue(queue, 10);
+    enqueue(queue, 20);
+    enqueue(queue, 30);
+    enqueue(queue, 40);
+    printf("%d dequeued from queue\n\n", dequeue(queue));
+    printf("%d dequeued from queue\n\n", dequeue(queue));
+    printf("%d dequeued from queue\n\n", dequeue(queue));
+    printf("%d dequeued from queue\n\n", dequeue(queue));
+    enqueue(queue, 30);
+    enqueue(queue, 40);
+    printf("Front item is %d\n", front(queue));
+    printf("Rear item is %d\n", rear(queue));
     return 0;
 }
