@@ -1,5 +1,3 @@
-// CPP program for array
-// implementation of queue
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -23,7 +21,8 @@ Queue *createQueue(unsigned capacity)
 
     // This is important, see the enqueue
     queue->rear = capacity - 1;
-    queue->array = new int[(queue->capacity * sizeof(int))];
+    queue->array = new int[(
+        queue->capacity * sizeof(int))];
     return queue;
 }
 
@@ -79,17 +78,29 @@ int rear(Queue *queue)
         return INT_MIN;
     return queue->array[queue->rear];
 }
+
 // Driver code
 int main()
 {
-    Queue *queue = createQueue(1000);
+    Queue *queue = createQueue(4);
 
     enqueue(queue, 10);
     enqueue(queue, 20);
     enqueue(queue, 30);
     enqueue(queue, 40);
+
     cout << dequeue(queue) << " dequeued from queue\n";
+    cout << dequeue(queue) << " dequeued from queue\n";
+    cout << dequeue(queue) << " dequeued from queue\n";
+    cout << dequeue(queue) << " dequeued from queue\n";
+    cout << queue->size << endl;
+    enqueue(queue, 10);
+    enqueue(queue, 20);
+    enqueue(queue, 30);
+    enqueue(queue, 40);
+    cout << queue->size << endl;
     cout << "Front item is " << front(queue) << endl;
     cout << "Rear item is " << rear(queue) << endl;
+
     return 0;
 }
