@@ -78,3 +78,4 @@ int main()
     cout << "Queue Front : " << (q.front)->data << endl;
     cout << "Queue Rear : " << (q.rear)->data;
 }
+// This code is contributed by rathbhupendra
