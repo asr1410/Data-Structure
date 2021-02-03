@@ -1,70 +1,64 @@
-#include <stdio.h>
+#include <bits/stdc++.h>
+using namespace std;
 
-void printArray(int *A, int n)
+void swap(int *a, int *b)
 {
-    for (int i = 0; i < n; i++)
-    {
-        printf("%d ", A[i]);
-    }
-    printf("\n");
+	int t = *a;
+	*a = *b;
+	*b = t;
 }
 
-int partition(int A[], int low, int high)
+int partition(int arr[], int low, int high)
 {
-    int pivot = A[low];
-    int i = low + 1;
-    int j = high;
-    int temp;
+	int pivot = arr[high]; // pivot
+	int i = (low - 1);	   // Index of smaller element
 
-    do
-    {
-        while (A[i] <= pivot)
-        {
-            i++;
-        }
-        while (A[j] > pivot)
-        {
-            j--;
-        }
-
-        if (i < j)
-        {
-            temp = A[i];
-            A[i] = A[j];
-            A[j] = temp;
-        }
-    } while (i < j);
-
-    // Swap A[low] and A[j]
-    temp = A[low];
-    A[low] = A[j];
-    A[j] = temp;
-    return j;
+	for (int j = low; j <= high - 1; j++)
+	{
+		// If current element is smaller than the pivot
+		if (arr[j] < pivot)
+		{
+			i++; // increment index of smaller element
+			swap(&arr[i], &arr[j]);
+		}
+	}
+	swap(&arr[i + 1], &arr[high]);
+	return (i + 1);
 }
 
-void quickSort(int A[], int low, int high)
+/* The main function that implements QuickSort 
+arr[] --> Array to be sorted, 
+low --> Starting index, 
+high --> Ending index */
+void quickSort(int arr[], int low, int high)
 {
-    int partitionIndex; // Index of pivot after partition
+	if (low < high)
+	{
+		/* pi is partitioning index, arr[p] is now 
+		at right place */
+		int pi = partition(arr, low, high);
 
-    if (low < high)
-    {
-        partitionIndex = partition(A, low, high);
-        quickSort(A, low, partitionIndex - 1);  // sort left subarray
-        quickSort(A, partitionIndex + 1, high); // sort right subarray
-    }
+		// Separately sort elements before
+		// partition and after partition
+		quickSort(arr, low, pi - 1);
+		quickSort(arr, pi + 1, high);
+	}
+}
+
+void printArray(int arr[], int size)
+{
+	int i;
+	for (i = 0; i < size; i++)
+		cout << arr[i] << " ";
+	cout << endl;
 }
 
 int main()
 {
-    //int A[] = {3, 5, 2, 13, 12, 3, 2, 13, 45};
-    int A[] = {9, 4, 4, 8, 7, 5, 6};
-    // 3, 5, 2, 13, 12, 3, 2, 13, 45
-    // 3, 2, 2, 13i, 12, 3j, 5, 13, 45
-    // 3, 2, 2, 3j, 12i, 13, 5, 13, 45 --> first call to partition returns 3
-    int n = 9;
-    n = 7;
-    printArray(A, n);
-    quickSort(A, 0, n - 1);
-    printArray(A, n);
-    return 0;
+	int arr[] = {10, 7, 8, 9, 1, 5};
+	int n = sizeof(arr) / sizeof(arr[0]);
+	quickSort(arr, 0, n - 1);
+	cout << "Sorted array: \n";
+	printArray(arr, n);
+	return 0;
 }
