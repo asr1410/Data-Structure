@@ -18,13 +18,13 @@ struct Node *createNode(int data)
     n->right = NULL;
     return n;
 }
-void preorderTraversal(struct Node *root)
+void postorderTraversal(struct Node *root)
 {
     if (root != NULL)
     {
+        postorderTraversal(root->left);
+        postorderTraversal(root->right);
         cout << root->data;
-        preorderTraversal(root->left);
-        preorderTraversal(root->right);
     }
 }
 int main()
@@ -39,6 +39,6 @@ int main()
     p->left = p1;
     p->right = p2;
 
-    preorderTraversal(p);
+    postorderTraversal(p);
     return 0;
 }
