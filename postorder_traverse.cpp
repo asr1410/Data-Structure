@@ -8,7 +8,7 @@ struct Node
     struct Node *right;
 };
 
-//function for creating node
+//function for creating node for the tree
 struct Node *createNode(int data)
 {
     struct Node *n;
