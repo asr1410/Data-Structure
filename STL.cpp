@@ -8,7 +8,5 @@ using namespace std;
 //     c.Algorithm
 int main()
 {
-    array<int, 5> myarray = {1, 2, 3, 4, 5}; //intialize list
-    array<int, 5> myarray2{1, 2, 3, 4, 5};   //uniform intialization
     return 0;
 }
